@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodos de extracion</title>
+</head>
+<body>
+    <br>
+    <h1>Ingrese aqui el metodo de cafe y que tipo de extración es</h1>
+    <br>
+    <hr>
+    <form action="{% url 'MetodosDeCafe' %}" method="POST">{% csrf_token %}
+
+        <p>Nombre del metodo: <input type="text" name="metnombre"></p>
+        <p>Tipo de metodo: <input type="text" name="mettipo"></p>
+
+        <input type="submit" value="Cargar">
+
+    </form>
+    <hr>
+</body>
+</html>

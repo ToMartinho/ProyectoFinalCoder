@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from app_STT.models import Tipos_de_cafe
+from django.http import HttpResponse
+from app_STT.models import Tipos_de_cafe, Metodo
 
 # Create your views here.
 
@@ -21,4 +22,19 @@ def ver_tipos_cafe(self):
 
     lista_cafes = Tipos_de_cafe.objects.all()
     return render(self, "Listacafes.html", {"list_cafe": lista_cafes} )
+
+def metodos(request):
+
+    if (request.method == 'POST'):
+
+        metodo_nombre = Metodo(nombre=request.POST['metnombre'], tipo=request.POST['mettipo'])
+        metodo_nombre.save()
+        return render(request, 'index.html')
+    
+    return render(request, "MetodosDeCafe.html")
+
+def ver_lista_metodos(self):
+    lista = Metodo.objects.all()
+    return render(self, "lista_metodos.html", {"lista_metodos": lista})
+
     
