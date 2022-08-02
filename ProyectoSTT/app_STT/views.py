@@ -74,6 +74,5 @@ def buscar(request):
         return render(request, 'resultadobusqueda.html',{'cafe': cafe})
     
     else:
-        repuesta = "No es un tipo de cafe"
-
-    return HttpResponse(repuesta)
+        respuesta = "No es un tipo de cafe"
+        return render(request, 'busquedanegativa.html',{'cafe': respuesta})
