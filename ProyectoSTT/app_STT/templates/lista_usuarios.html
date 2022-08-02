@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Usuarios</title>
-</head>
-<body>
-    <br>
-    <h1> <strong style="color: burlywood">USUARIOS </strong></h1>
-    <hr>
+{% extends 'inicio.html' %}
 
-        
-        {% for usuario in lista_usuarios %}
-            <li><strong>Nonbre de usuario:</strong> {{usuario.nombre}} <br> <strong>Email:</strong> {{usuario.email}}</li>            
-        {% endfor %}
+
+{% block codigoaca %}
+    <div style="margin-left:270px; margin-top:50px;">
+        <br>
+        <h1> <strong style="color: burlywood">USUARIOS </strong></h1>
+        <hr>
+
             
+            {% for usuario in lista_usuarios %}
+                <li><strong>Nonbre de usuario:</strong> {{usuario.nombre}} <br> <strong>Email:</strong> {{usuario.email}}</li>            
+            {% endfor %}
+                
 
-    <hr>
-</body>
-</html>
+        <hr>
+    </div>
+{% endblock codigoaca %}

@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Cafes</title>
-</head>
-<body>
-    <br>
-    <h1> <strong style="color: burlywood">Listas de cafes </strong></h1>
-    <hr>
+{% extends 'inicio.html' %}
 
-        
-        {% for cafes in list_cafe %}
-            <li><strong>Nombre del cafe:</strong> {{cafes.nombre_tipo}} <strong>Ingredientes de preparacion:</strong> {{cafes.ingredientes}}</li>            
-        {% endfor %}
+{% block codigoaca %}
+
+    
+    <div style="margin-left:270px; margin-top:50px;">
+        <br>
+        <h1><strong style="color: burlywood">Listas de cafes </strong></h1>
+        <hr>
+
             
+            {% for cafes in list_cafe %}
+                <li><strong>Nombre del cafe:</strong> {{cafes.nombre_tipo}} <strong>Ingredientes de preparacion:</strong> {{cafes.ingredientes}}</li>            
+            {% endfor %}
+                
 
-    <hr>
-</body>
-</html>
+        <hr>
+    </div>
+    
+
+{% endblock codigoaca %}
