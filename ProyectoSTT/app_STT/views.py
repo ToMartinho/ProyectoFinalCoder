@@ -64,11 +64,7 @@ def crea_usuario(request):
         miFormulario = UsuarioFormulario()
         
         return render(request, 'usuarioFormulario.html', {'fomularioUsuario': miFormulario})
-
-def busquedacafe(request):
-
-    return render(request, 'BusquedaCafe.html')
-
+        
 def buscar(request):
     if request.GET['nombre_tipo']:
         tipo_de_cafe = request.GET['nombre_tipo']
