@@ -8,7 +8,7 @@ from app_STT.forms import UsuarioFormulario
 
 def inicio(request):
 
-    return render(request, 'index.html')
+    return render(request, 'inicio.html')
 
 def tipos_de_cafe(request):
 
@@ -16,7 +16,7 @@ def tipos_de_cafe(request):
 
         cafe_tipo = Tipos_de_cafe(nombre_tipo=request.POST['cafetipo'], ingredientes=request.POST['ingredientestipo'])
         cafe_tipo.save()
-        return render(request, 'index.html')
+        return render(request, 'inicio.html')
      
     return render (request, "TiposDeCafe.html")
 
@@ -31,7 +31,7 @@ def metodos(request):
 
         metodo_nombre = Metodo(nombre=request.POST['metnombre'], tipo=request.POST['mettipo'])
         metodo_nombre.save()
-        return render(request, 'index.html')
+        return render(request, 'inicio.html')
     
     return render(request, "MetodosDeCafe.html")
 
@@ -58,7 +58,7 @@ def crea_usuario(request):
 
             usuario.save()
                 
-            return render(request,'index.html')
+            return render(request,'inicio.html')
     else:
         
         miFormulario = UsuarioFormulario()
