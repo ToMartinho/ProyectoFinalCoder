@@ -1,6 +1,8 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
-from app_STT.models import Tipos_de_cafe, Metodo
+from app_STT.models import Tipos_de_cafe, Metodo, Usuarios
+from app_STT.forms import UsuarioFormulario
 
 # Create your views here.
 
@@ -38,3 +40,27 @@ def ver_lista_metodos(self):
     return render(self, "lista_metodos.html", {"lista_metodos": lista})
 
     
+
+def lista_usuarios(self):
+    Usuario = Usuarios.objects.all()
+    return render(self, "lista_usuarios.html", {"lista_usuarios": Usuario})
+
+def crea_usuario(request):
+    if request.method == 'POST':
+
+        miFormulario = UsuarioFormulario(request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario = Usuarios(nombre = data['nombre'], email = data['email'])
+
+            usuario.save()
+                
+            return render(request,'index.html')
+    else:
+        
+        miFormulario = UsuarioFormulario()
+        
+        return render(request, 'usuarioFormulario.html', {'fomularioUsuario': miFormulario})
