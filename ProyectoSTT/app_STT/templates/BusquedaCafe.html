@@ -1,0 +1,13 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    <div style="margin-left:270px; margin-top:85px;">
+        <form action="{%url 'buscar'%}" method="GET"> {% csrf_token %}
+            <p>Tipo de Cafe:<input type="text" name="nombre_tipo"></p>
+            <input type="submit" value="buscar">
+        </form>
+
+    </div>
+{% endblock codigoaca %}
+    

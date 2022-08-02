@@ -1,0 +1,13 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    <div style="margin-left:270px; margin-top:85px;">
+        {%for cafes in cafe %}
+        <li>
+           {{cafes.nombre_tipo}}
+        </li>
+        {% endfor %}
+    </div>
+{% endblock codigoaca %}
+    
