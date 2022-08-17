@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from app_STT.models import Tipos_de_cafe, Metodo, Usuarios
 from app_STT.forms import UsuarioFormulario
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -76,3 +78,54 @@ def buscar(request):
     else:
         respuesta = "No es un tipo de cafe"
         return render(request, 'busquedanegativa.html',{'cafe': respuesta})
+
+def ingreso(request):
+    if request.method == 'POST':
+
+        miFormulario = AuthenticationForm(request, data=request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario = data["username"]
+            clave = data["password"]
+
+            user = authenticate(username=usuario, password=clave)
+
+            if user:
+
+                login(request, user)
+
+                return render(request,'inicio.html', {"mensaje": f'Bienvenido {usuario}'})
+
+            else:
+                
+                return render(request,'inicio.html', {"mensaje": 'Error, los datos ingresados son incorrectos'})
+          
+                
+        return render(request,'inicio.html', {"mensaje": "Error, formulario invalido"})
+
+    else:
+        
+        miFormulario = AuthenticationForm()
+        
+    return render(request, 'login.html', {'miFormulario': miFormulario})
+
+def register(request):
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            usuario = form.cleaned_data["username"]
+            form.save()
+
+            return render(request, "inicio.html", {"mensaje": f'Usuario {usuario} creado exitosamente, Bienvenido.'})        
+
+    else:
+
+        form = UserCreationForm()
+
+    return render(request, "registro.html", {'miFormulario': form})

@@ -1,0 +1,15 @@
+{% extends 'inicio.html' %}
+
+{% block codigoaca %}
+    <div style="margin-left:270px; margin-top:75px;">
+        <form action="{% url 'Registrar' %}" method="POST">{% csrf_token %}
+
+            <h4>A continuacion ingrese sus datos para registrar un nuevo usuario</h4>
+            <br>
+
+            {{miFormulario.as_p}}
+            <input type="submit" value="Crear Usuario">
+
+        </form>
+    </div>
+{% endblock codigoaca %}

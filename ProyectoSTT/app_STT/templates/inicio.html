@@ -30,8 +30,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href={% url "ListaUsuarios" %}>Lista Usuarios</a></li>
-                        <li><a class="dropdown-item" href={% url "creausuario" %}>Crear Usuario</a></li>
+                        <li><a class="dropdown-item" href={% url "Login" %}>Login</a></li>
+                        <li><a class="dropdown-item" href={% url "Registrar" %}>Crear Usuario</a></li>
                     </ul>
                 </li>
             </ul>
@@ -45,7 +45,7 @@
                             <a class="nav-link" href={% url 'Inicio' %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 INICIO
-                            </a>
+                            </a>                            
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href={% url "TiposDeCafe" %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -73,6 +73,12 @@
             </div>
                 
                 {% block codigoaca %}
+
+                    <div style="margin-left:270px; margin-top:75px;">
+
+                        <h4>{{mensaje}}</h4>
+
+                    </div>
                     
                 {% endblock codigoaca %}
                     
