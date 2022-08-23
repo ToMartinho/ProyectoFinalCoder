@@ -5,6 +5,9 @@ from app_STT.models import Tipos_de_cafe, Metodo, Usuarios
 from app_STT.forms import UsuarioFormulario
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en CLASES
+from django.contrib.auth.decorators import login_required #para vistas basadas en FUNCIONES
+
 
 # Create your views here.
 
@@ -12,6 +15,7 @@ def inicio(request):
 
     return render(request, 'inicio.html')
 
+@login_required
 def tipos_de_cafe(request):
 
     if (request.method == 'POST'):
@@ -22,11 +26,13 @@ def tipos_de_cafe(request):
      
     return render (request, "TiposDeCafe.html")
 
+
 def ver_tipos_cafe(self):
 
     lista_cafes = Tipos_de_cafe.objects.all()
     return render(self, "Listacafes.html", {"list_cafe": lista_cafes} )
 
+@login_required
 def metodos(request):
 
     if (request.method == 'POST'):
