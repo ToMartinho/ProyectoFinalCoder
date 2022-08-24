@@ -1,10 +1,14 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from app_STT.models import Tipos_de_cafe, Metodo, Usuarios
-from app_STT.forms import UsuarioFormulario
+from app_STT.models import Tipos_de_cafe, Metodo
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.views.generic.detail import DetailView
+from app_STT.forms import RegistroUsuario
+from django.views.generic import DeleteView,UpdateView
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -25,7 +29,7 @@ def tipos_de_cafe(request):
 def ver_tipos_cafe(self):
 
     lista_cafes = Tipos_de_cafe.objects.all()
-    return render(self, "Listacafes.html", {"list_cafe": lista_cafes} )
+    return render(self, "Listacafes.html", {"lista_cafes": lista_cafes} )
 
 def metodos(request):
 
@@ -44,28 +48,9 @@ def ver_lista_metodos(self):
     
 
 def lista_usuarios(self):
-    Usuario = Usuarios.objects.all()
+    Usuario = User.objects.all()
     return render(self, "lista_usuarios.html", {"lista_usuarios": Usuario})
 
-def crea_usuario(request):
-    if request.method == 'POST':
-
-        miFormulario = UsuarioFormulario(request.POST)
-
-        if miFormulario.is_valid():
-
-            data = miFormulario.cleaned_data
-
-            usuario = Usuarios(nombre = data['nombre'], email = data['email'])
-
-            usuario.save()
-                
-            return render(request,'inicio.html')
-    else:
-        
-        miFormulario = UsuarioFormulario()
-        
-        return render(request, 'usuarioFormulario.html', {'fomularioUsuario': miFormulario})
         
 def buscar(request):
     if request.GET['nombre_tipo']:
@@ -115,17 +100,55 @@ def ingreso(request):
 def register(request):
     
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroUsuario(request.POST)
 
         if form.is_valid():
 
             usuario = form.cleaned_data["username"]
+
             form.save()
 
             return render(request, "inicio.html", {"mensaje": f'Usuario {usuario} creado exitosamente, Bienvenido.'})        
 
     else:
 
-        form = UserCreationForm()
+        form = RegistroUsuario()
 
-    return render(request, "registro.html", {'miFormulario': form})
+    return render(request, "registro.html", {'miFormulario': form}) 
+
+class cafes_DeleteView(DeleteView):
+    model = Tipos_de_cafe
+    template_name = "delete_cafe.html"
+    success_url = '/app_STT/'
+
+class cafes_DetailView(DetailView):
+    model = Tipos_de_cafe
+    template_name = "detail_cafe.html"
+    context_object_name = 'cafe'
+
+
+class cafes_UpdateView(UpdateView):
+    model = Tipos_de_cafe
+    template_name = "update_cafe.html"
+    fields = ['nombre_tipo','ingredientes']
+    success_url = '/app_STT/'
+
+
+class usuario_DeleteView(DeleteView):
+    model = User
+    template_name = "delete_user.html"
+    success_url = '/app_STT/'
+
+class usuario_DetailView(DetailView):
+    model = User
+    template_name = "detail_user.html"
+    context_object_name = 'user'
+
+
+class usuario_UpdateView(UpdateView):
+    model = User
+    template_name = "update_user.html"
+    fields = ['username','email']
+    success_url = '/app_STT/'
+
+

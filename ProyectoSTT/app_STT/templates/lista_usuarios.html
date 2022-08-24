@@ -9,7 +9,9 @@
 
             
             {% for usuario in lista_usuarios %}
-                <li><strong>Nonbre de usuario:</strong> {{usuario.nombre}} <br> <strong>Email:</strong> {{usuario.email}}</li>            
+                <li><strong>Nonbre de usuario:</strong> <a href="{% url 'detailuser' usuario.id %}">{{usuario.username}} </a> </li>
+                <button><a href="{% url 'updateuser' usuario.id %}">Editar</a></button>
+                <button><a href="{% url 'deleteuser' usuario.id %}">eliminar</a></button>            
             {% endfor %}
                 
 

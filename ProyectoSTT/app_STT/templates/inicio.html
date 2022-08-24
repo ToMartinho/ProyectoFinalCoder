@@ -42,18 +42,18 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href={% url 'Inicio' %}>
+                            <a class="nav-link" href={% url 'chat' %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                INICIO
+                                Chat
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href={% url "TiposDeCafe" %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                AGREGAR RECETAS
+                                Agregar Recetas
                             </a>
                             <a class="nav-link" href={% url "MetodosDeCafe" %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                AGREGAR METODO
+                                Agregar Metodo
                             </a>
                             <div class="sb-sidenav-menu-heading">Nuestros Cafes</div>
                             <a class="nav-link" href={% url "listaDeCafes" %}>
@@ -63,6 +63,10 @@
                             <a class="nav-link" href={% url "listaMetodos" %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Metodos
+                            </a>
+                            <a class="nav-link" href={% url "ListaUsuarios" %}>
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Usuarios
                             </a>
                                         </div>
                     </div>

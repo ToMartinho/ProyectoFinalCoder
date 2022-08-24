@@ -11,6 +11,7 @@
     <form action="" id="form">
 
         <input type="text" name="message"/>
+        <input type="submit" value="enviar">
     </form>
 
     <div id="messages"></div>
@@ -26,8 +27,10 @@
 
             if(data.type==='chat'){
                 let messages = document.getElementById('messages')
-
-                messages.insertAdjacentHTML('beforeend',`<div><p>${data.message}</p></div>`)
+                messages.insertAdjacentHTML('beforeend',`<div>
+                            <p style="margin-left:270px;">${data.message}</p>
+                        </div>`)
+                    
             }
         }
         
