@@ -11,6 +11,7 @@ urlpatterns = [
     path('buscar/', buscar, name = "buscar"),
     path('login/', ingreso, name = "Login"),
     path('registrar/', register, name = "Registrar"),
+    path('logout/', register, name = "Registrar"),
     path('detallecafe/<pk>', cafes_DetailView.as_view(), name = "detailcafe"),
     path('borrarcafe/<pk>', cafes_DeleteView.as_view(), name = "deletecafe"),
     path('actualizarcafe/<pk>', cafes_UpdateView.as_view(), name = "updatecafe"),
