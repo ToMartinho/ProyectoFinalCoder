@@ -1,0 +1,15 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    <div style="margin-left:270px; margin-top:50px;">
+        <br>
+        <h1> <strong style="color: burlywood">PERFIL </strong></h1>
+        <hr>
+                <li><strong>Nombre de usuario:</strong>{{usuario.username}} <strong>Email:</strong>{{usuario.email}} </li>
+                <button><a href="{% url 'updateuser' usuario.id %}">Editar</a></button>
+                <button><a href="{% url 'deleteuser' usuario.id %}">eliminar</a></button>            
+
+        <hr>
+    </div>
+{% endblock codigoaca %}

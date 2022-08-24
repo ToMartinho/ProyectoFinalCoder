@@ -1,5 +1,5 @@
 from django.urls import path
-from app_STT.views import tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DetailView, usuario_DeleteView
+from app_STT.views import tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DetailView, usuario_DeleteView,perfil_DetailView
 
 urlpatterns = [
     path('', inicio, name= "Inicio"),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('borrarusuario/<pk>', usuario_DeleteView.as_view(), name = "deleteuser"),
     path('actualizarusuario/<pk>', usuario_UpdateView.as_view(), name = "updateuser"),
     path('perfilusuario/<pk>', usuario_DetailView.as_view(), name = "detailuser"),
+    path('profile/', perfil_DetailView.as_view(), name = "perfil"),
 
 ]
 

@@ -8,8 +8,8 @@ from django.views.generic.detail import DetailView
 from app_STT.forms import RegistroUsuario
 from django.views.generic import DeleteView,UpdateView
 from django.contrib.auth.models import User
-
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def inicio(request):
@@ -144,6 +144,11 @@ class usuario_DetailView(DetailView):
     template_name = "detail_user.html"
     context_object_name = 'user'
 
+
+class perfil_DetailView(DetailView):
+    model = User
+    template_name = "perfil.html"
+    context_object_name = 'user'
 
 class usuario_UpdateView(UpdateView):
     model = User
