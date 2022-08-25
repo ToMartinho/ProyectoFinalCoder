@@ -8,8 +8,6 @@ from django.views.generic.detail import DetailView
 from app_STT.forms import RegistroUsuario
 from django.views.generic import DeleteView,UpdateView
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en CLASES
 from django.contrib.auth.decorators import login_required #para vistas basadas en FUNCIONES
 
@@ -123,6 +121,9 @@ def register(request):
 
     return render(request, "registro.html", {'miFormulario': form}) 
 
+def logout(request):
+    return render(request,'logout.html')
+
 class cafes_DeleteView(DeleteView):
     model = Tipos_de_cafe
     template_name = "delete_cafe.html"
@@ -156,6 +157,8 @@ class perfil_DetailView(DetailView):
     model = User
     template_name = "perfil.html"
     context_object_name = 'user'
+    def get_object(self):
+        return self.request.user
 
 class usuario_UpdateView(UpdateView):
     model = User

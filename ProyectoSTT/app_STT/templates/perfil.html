@@ -6,9 +6,9 @@
         <br>
         <h1> <strong style="color: burlywood">PERFIL </strong></h1>
         <hr>
-                <li><strong>Nombre de usuario:</strong>{{usuario.username}} <strong>Email:</strong>{{usuario.email}} </li>
-                <button><a href="{% url 'updateuser' usuario.id %}">Editar</a></button>
-                <button><a href="{% url 'deleteuser' usuario.id %}">eliminar</a></button>            
+                <li><strong>Nombre de usuario:</strong>{{user.username}} <strong>Email:</strong>{{user.email}} </li>
+                <button><a href="{% url 'updateuser'  %}">Editar</a></button>
+                <button><a href="{% url 'deleteuser'  %}">eliminar</a></button>          
 
         <hr>
     </div>

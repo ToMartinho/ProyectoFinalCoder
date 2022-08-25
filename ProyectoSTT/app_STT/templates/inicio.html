@@ -33,7 +33,7 @@
 
                         
                         {% if user.is_authenticated %}
-                            <li><p style="margin-left: 15px;">{{user.username}}</p></li>
+                            <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 15px;">{{user.username}}</a></p></li>
                             <li><a class="dropdown-item" href={% url "Deslog" %}>Logout</a></li>
                         {% else %}
                             <li><a class="dropdown-item" href={% url "Login" %}>Login</a></li>
