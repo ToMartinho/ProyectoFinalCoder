@@ -20,7 +20,6 @@ urlpatterns = [
     path('actualizarcafe/<pk>', cafes_UpdateView.as_view(), name = "updatecafe"),
     path('borrarusuario/<pk>', usuario_DeleteView.as_view(), name = "deleteuser"),
     path('actualizarusuario/<pk>', usuario_UpdateView.as_view(), name = "updateuser"),
-    path('perfilusuario/<pk>', usuario_DetailView.as_view(), name = "detailuser"),
     path('profile/', perfil_DetailView.as_view(), name = "perfil"),
     path('actualizar_avatar/',agregar_avatar , name = "updateavatar"),
 
