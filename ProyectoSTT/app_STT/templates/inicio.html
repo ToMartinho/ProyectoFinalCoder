@@ -36,12 +36,12 @@
                         {% if user.is_authenticated %}
                             
                             {% if url %}
-                                <img src="{{url}}" height='45px' alt="imagen">
+                                <li><img src="{{url}}" height='45px' alt="imagen"></li>
                             {% endif %}
-                            <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 15px;">{{user.username}}</a></p></li>
+                            <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 0px;">{{user.username}}</a></p></li>
                             <li><a class="dropdown-item" href={% url "Deslog" %}>Logout</a></li>
                             
-                        </li>
+                    
                         {% else %}
                             <li><a class="dropdown-item" href={% url "Login" %}>Login</a></li>
                             <li><a class="dropdown-item" href={% url "Registrar" %}>Crear Usuario</a></li>

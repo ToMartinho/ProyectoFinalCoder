@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from app_STT.models import Tipos_de_cafe, Metodo
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
 from app_STT.forms import RegistroUsuario, avatarformulario
 from django.views.generic import DeleteView,UpdateView,CreateView
@@ -124,11 +124,9 @@ def register(request):
 
         form = RegistroUsuario()
 
-    return render(request, "registro.html", {'miFormulario': form}) 
+    return render(request, "registro.html", {'miFormulario': form})
 
-def logout(request):
-    return render(request,'logout.html')
-
+@login_required
 def agregar_avatar(request):
     
     if request.method == 'POST':
@@ -154,7 +152,7 @@ def agregar_avatar(request):
 
 
 
-class cafes_DeleteView(DeleteView):
+class cafes_DeleteView(LoginRequiredMixin, DeleteView):
     model = Tipos_de_cafe
     template_name = "delete_cafe.html"
     success_url = '/app_STT/'
@@ -165,14 +163,14 @@ class cafes_DetailView(DetailView):
     context_object_name = 'cafe'
 
 
-class cafes_UpdateView(UpdateView):
+class cafes_UpdateView(LoginRequiredMixin, UpdateView):
     model = Tipos_de_cafe
     template_name = "update_cafe.html"
     fields = ['nombre_tipo','ingredientes']
     success_url = '/app_STT/'
 
 
-class usuario_DeleteView(DeleteView):
+class usuario_DeleteView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = "delete_user.html"
     success_url = '/app_STT/'
@@ -190,7 +188,7 @@ class perfil_DetailView(DetailView):
     def get_object(self):
         return self.request.user
 
-class usuario_UpdateView(UpdateView):
+class usuario_UpdateView(LoginRequiredMixin ,UpdateView):
 
     model = User
     template_name = "update_user.html"
@@ -198,7 +196,7 @@ class usuario_UpdateView(UpdateView):
     success_url = '/app_STT/'
 
 
-class avatar_UpdateView(CreateView):
+class avatar_UpdateView(LoginRequiredMixin, CreateView):
 
     model= avatar
     template_name = 'update_avatar.html'
