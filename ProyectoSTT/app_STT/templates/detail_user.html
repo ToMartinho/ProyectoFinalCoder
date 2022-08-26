@@ -1,0 +1,16 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    
+    <div style="margin-left:270px; margin-top:85px;">
+        <h1><strong style="color: burlywood">Perfil Usuario</strong></h1>
+        <hr>
+        <ul>
+                <li><strong>Nombre de usuario: </strong> {{user.username}} <strong>Email: </strong>{{user.email}}</li>
+                
+        </ul>
+        <hr>
+    </div>
+    
+{% endblock codigoaca %}

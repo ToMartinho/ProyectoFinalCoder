@@ -9,7 +9,8 @@
 
             
             {% for usuario in lista_usuarios %}
-                <li><strong>Nonbre de usuario:</strong> {{usuario.nombre}} <br> <strong>Email:</strong> {{usuario.email}}</li>            
+                <li><strong>Nombre de usuario:</strong> <a href="{% url 'detailuser' usuario.id %}">{{usuario.username}} </a>
+                <img src="{{url}}" height='55px' alt="imagen"> </li>            
             {% endfor %}
                 
 

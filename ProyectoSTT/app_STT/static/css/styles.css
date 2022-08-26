@@ -1401,7 +1401,15 @@ progress {
     flex: 0 0 auto;
     width: 66.66666667%;
   }
-
+  .background {
+    text-align: center;
+    width: 590;
+    height: 720px;
+    background-color: lightcoral;
+    background-image: url(../assets/img/background.jpg);
+    background-size: cover;
+    
+  }
   .col-lg-9 {
     flex: 0 0 auto;
     width: 75%;

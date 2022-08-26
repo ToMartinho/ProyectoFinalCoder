@@ -9,11 +9,12 @@
         <hr>
 
             
-            {% for cafes in list_cafe %}
-                <li><strong>Nombre del cafe:</strong> {{cafes.nombre_tipo}} <strong>Ingredientes de preparacion:</strong> {{cafes.ingredientes}}</li>            
+            {% for cafes in lista_cafes %}
+                <li><strong>Nombre del cafe:</strong> <a href="{% url 'detailcafe' cafes.id %}">{{cafes.nombre_tipo}}</a></li>
+                <button><a href="{% url 'updatecafe' cafes.id %}">Editar</a></button>     
+                <button><a href="{% url 'deletecafe' cafes.id %}">eliminar</a></button>      
             {% endfor %}
                 
-
         <hr>
     </div>
     

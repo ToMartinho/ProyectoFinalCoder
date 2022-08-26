@@ -8,6 +8,9 @@
            {{cafes.nombre_tipo}}
         </li>
         {% endfor %}
+        {%if not cafe %}
+        No se han encontrado resultados
+        {% endif %}
     </div>
 {% endblock codigoaca %}
     
