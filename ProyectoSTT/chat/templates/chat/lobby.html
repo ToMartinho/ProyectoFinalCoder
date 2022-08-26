@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1> holaaaa</h1>
-    <form action="" id="form">
+
+</html> -->
+
+
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+   
+
+<body style="margin-left:270px; margin-top:85px;">
+    <h1> Bienvenidos al chat global cafeteros usuario: {{user.username}}</h1>
+    <form style="margin-left:-950px; margin-top:85px;" action="" id="form">
 
         <input type="text" name="message"/>
         <input type="submit" value="enviar">
@@ -28,7 +38,7 @@
             if(data.type==='chat'){
                 let messages = document.getElementById('messages')
                 messages.insertAdjacentHTML('beforeend',`<div>
-                            <p style="margin-left:270px;">${data.message}</p>
+                            <p style="margin-left:75px; margin-top:55px;">{{user.username}}: ${data.message}</p>
                         </div>`)
                     
             }
@@ -46,4 +56,7 @@
         })
     </script>
 </body>
-</html>
+
+
+
+{% endblock codigoaca %}
