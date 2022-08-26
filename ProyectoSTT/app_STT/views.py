@@ -1,12 +1,12 @@
-
+from .models import avatar
 from django.shortcuts import render
 from django.http import HttpResponse
 from app_STT.models import Tipos_de_cafe, Metodo
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic.detail import DetailView
-from app_STT.forms import RegistroUsuario
-from django.views.generic import DeleteView,UpdateView
+from app_STT.forms import RegistroUsuario, avatarformulario
+from django.views.generic import DeleteView,UpdateView,CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en CLASES
 from django.contrib.auth.decorators import login_required #para vistas basadas en FUNCIONES
@@ -15,8 +15,13 @@ from django.contrib.auth.decorators import login_required #para vistas basadas e
 # Create your views here.
 
 def inicio(request):
+    try:
+        imagen = avatar.objects.filter(user=request.user.id)
 
-    return render(request, 'inicio.html')
+        return render(request, 'inicio.html',{"url":imagen[0].imagen.url})
+    except:
+
+        return render(request, 'inicio.html')
 
 @login_required
 def tipos_de_cafe(request):
@@ -124,6 +129,31 @@ def register(request):
 def logout(request):
     return render(request,'logout.html')
 
+def agregar_avatar(request):
+    
+    if request.method == 'POST':
+
+        form = avatarformulario(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            data = form.cleaned_data
+            
+            img = avatar(user=request.user, imagen=data['imagen'])
+
+            img.save()
+
+            return render(request, "inicio.html")        
+
+    else:
+
+        form = avatarformulario()
+
+    return render(request, "update_avatar.html", {'form': form}) 
+
+
+
+
 class cafes_DeleteView(DeleteView):
     model = Tipos_de_cafe
     template_name = "delete_cafe.html"
@@ -161,9 +191,16 @@ class perfil_DetailView(DetailView):
         return self.request.user
 
 class usuario_UpdateView(UpdateView):
+
     model = User
     template_name = "update_user.html"
     fields = ['username','email']
     success_url = '/app_STT/'
 
 
+class avatar_UpdateView(CreateView):
+
+    model= avatar
+    template_name = 'update_avatar.html'
+    fields = ['imagen']
+    success_url = '/app_STT/'
