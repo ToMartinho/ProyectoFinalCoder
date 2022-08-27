@@ -24,7 +24,7 @@
         <input type="submit" value="enviar">
     </form>
 
-    <div id="messages"></div>
+    <div style="color:red ;" id="messages"></div>
 
     <script type='text/javascript'>
         let url = `ws://${window.location.host}/chat/ws/socket-server/`
@@ -34,11 +34,10 @@
         chatSocket.onmessage = function(e){
             let data = JSON.parse(e.data)
             console.log('Data:', data)
-
             if(data.type==='chat'){
                 let messages = document.getElementById('messages')
                 messages.insertAdjacentHTML('beforeend',`<div>
-                            <p style="margin-left:75px; margin-top:55px;">{{user.username}}: ${data.message}</p>
+                            <p style="margin-left:75px; margin-top:55px;"> ${data.usuario}: ${data.message}</p>
                         </div>`)
                     
             }
@@ -47,9 +46,11 @@
         let form = document.getElementById('form')
         form.addEventListener('submit', (e)=>{
             e.preventDefault()
-            let message = e.target.message.value
-            chatSocket.send(JSON.stringify({
-                'message':message
+            let message = e.target.message.value;
+            var usuario = '{{request.user}}';
+            chatSocket.send(JSON.stringify({ 
+               'message':message,
+               'usuario':usuario
             }))
             form.reset()
 
