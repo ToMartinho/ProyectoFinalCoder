@@ -47,10 +47,11 @@
         form.addEventListener('submit', (e)=>{
             e.preventDefault()
             let message = e.target.message.value;
-            var usuario = '{{request.user}}';
+            var usuario = '{{user.username}}';
             chatSocket.send(JSON.stringify({ 
                'message':message,
                'usuario':usuario
+            
             }))
             form.reset()
 

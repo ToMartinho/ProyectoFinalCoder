@@ -1,11 +1,12 @@
-from .models import avatar
+from ast import Delete
+from .models import Perfil
 from django.shortcuts import render
 from django.http import HttpResponse
 from app_STT.models import Tipos_de_cafe, Metodo
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
-from app_STT.forms import RegistroUsuario, avatarformulario
+from app_STT.forms import BioFormulario, RegistroUsuario, AvatarFormulario
 from django.views.generic import DeleteView,UpdateView,CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en CLASES
@@ -16,9 +17,9 @@ from django.contrib.auth.decorators import login_required #para vistas basadas e
 
 def inicio(request):
     try:
-        imagen = avatar.objects.filter(user=request.user.id)
+        avatares = Perfil.objects.filter(user=request.user.id)
 
-        return render(request, 'inicio.html',{"url":imagen[0].imagen.url})
+        return render(request, 'inicio.html',{"url":avatares.imagen.url})
     except:
 
         return render(request, 'inicio.html')
@@ -57,9 +58,15 @@ def ver_lista_metodos(self):
 
     
 
-def lista_usuarios(self):
+def lista_usuarios(request):
     Usuario = User.objects.all()
-    return render(self, "lista_usuarios.html", {"lista_usuarios": Usuario})
+    try:
+        avatares = Avatar.objects.filter(user=request.user.id)
+
+        return render(request, "lista_usuarios.html",{"url":avatares[0].imagen.url, "lista_usuarios": Usuario})
+    except:
+
+        return render(request, "lista_usuarios.html", {"lista_usuarios": Usuario})
 
         
 def buscar(request):
@@ -130,24 +137,63 @@ def register(request):
 def agregar_avatar(request):
     
     if request.method == 'POST':
-
-        form = avatarformulario(request.POST, request.FILES)
+        
+        
+        form = AvatarFormulario(request.POST, request.FILES)
 
         if form.is_valid():
 
-            data = form.cleaned_data
+            u = Perfil.objects.filter(user=request.user)
+
+            u.delete()
             
-            img = avatar(user=request.user, imagen=data['imagen'])
+            data = form.cleaned_data
+
+            usr = User.objects.get(username=request.user)
+
+            img = Perfil(user=usr,imagen=data['imagen'])
 
             img.save()
-
             return render(request, "inicio.html")        
 
     else:
 
-        form = avatarformulario()
+        form = AvatarFormulario()
 
     return render(request, "update_avatar.html", {'form': form}) 
+
+@login_required
+def agregar_bio(request):
+    
+    if request.method == 'POST':
+        
+        
+        form = BioFormulario(request.POST)
+
+        if form.is_valid():
+            
+            usr = User.objects.get(username=request.user)
+            
+            data = form.cleaned_data
+            if data['bio']:
+                b = Perfil(user=usr,bio=data['bio'])
+
+                b.save()
+
+            elif data['link']:
+
+                a = Perfil(user=usr,link=data['link'])
+                a.save()
+            return render(request, "inicio.html")        
+
+    else:
+
+        form = BioFormulario()
+
+    return render(request, "update_bio.html", {'form': form}) 
+
+def perfil(request):
+    return render(request, 'perfil.html')
 
 
 
@@ -181,12 +227,12 @@ class usuario_DetailView(DetailView):
     context_object_name = 'user'
 
 
-class perfil_DetailView(DetailView):
-    model = User
-    template_name = "perfil.html"
-    context_object_name = 'user'
-    def get_object(self):
-        return self.request.user
+#class perfil_DetailView(DetailView):
+   # model = User
+    #template_name = "perfil.html"
+    #context_object_name = 'user'
+    #def get_object(self):
+        #return self.request.user
 
 class usuario_UpdateView(LoginRequiredMixin ,UpdateView):
 
@@ -196,9 +242,28 @@ class usuario_UpdateView(LoginRequiredMixin ,UpdateView):
     success_url = '/app_STT/'
 
 
-class avatar_UpdateView(LoginRequiredMixin, CreateView):
+class avatar_UpdateView(LoginRequiredMixin, UpdateView):
 
-    model= avatar
+    model= Perfil
     template_name = 'update_avatar.html'
-    fields = ['imagen']
+    form_class= AvatarFormulario
     success_url = '/app_STT/'
+    context_object_name = 'avatar'
+
+class Bio_DetailView(DetailView):
+    model = Perfil
+    template_name = "bio.html"
+    context_object_name = 'user'
+    def get_object(self):
+        return self.request.user
+
+
+
+#class bio_UpdateView(LoginRequiredMixin, UpdateView):
+
+    #model= Avatar
+    #template_name = 'perfilupdate.html'
+    #fields = ['bio','link']
+    #success_url = '/app_STT/'
+    #context_object_name = 'avatar'
+

@@ -33,12 +33,10 @@
 
                         
                         {% if user.is_authenticated %}
-                            
-                            {% if url %}
-                                <li><img src="{{url}}" height='45px' alt="imagen"></li>
-                            {% endif %}
+                            <img src="{{url}}" height='30px' alt="imagen">
                             <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 0px;">{{user.username}}</a></p></li>
                             <li><a class="dropdown-item" href={% url "Deslog" %}>Logout</a></li>
+                            <li><a class="dropdown-item" href={% url "bio" %}><p style="margin-left: 0px;">Bio</a></p></li>
                             
                     
                         {% else %}
@@ -88,9 +86,9 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">PROYECTO CODER FINAL</div>      
-                        <div>{% if url %}
+                        <div>
                             <img src="{{url}}" height='30px' alt="imagen">
-                        {% endif %}</div>                  
+                        </div>                  
                     </div>
                 </nav>
             </div>

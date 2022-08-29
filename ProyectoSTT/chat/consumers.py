@@ -1,6 +1,7 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
+from django.contrib.auth.models import User
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -22,17 +23,22 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        usuario = text_data_json['usuario']
 
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {
                 'type':'chat_message',
-                'message':message
+                'message':message,
+                'usuario':usuario,
             }
         )
     def chat_message(self, event):
         message = event['message']
+        usuario = event['usuario']
 
         self.send(text_data=json.dumps({
             'type':'chat',
-            'message':message}))
+            'message':message,
+            'usuario':usuario,
+            }))

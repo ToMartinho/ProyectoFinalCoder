@@ -1,0 +1,21 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    
+    <div style="margin-left:270px; margin-top:85px;">
+        <h1><strong style="color: burlywood">Actualizar perfil</strong></h1>
+        <hr>
+        <ul>
+                <form action="{% url 'perfilavatar' %}" method="POST"> {% csrf_token %}
+                    
+                    {{form.as_p}}
+
+                    <input type="submit" value="actualizar">
+
+                </form>
+        </ul>
+        <hr>
+    </div>
+    
+{% endblock codigoaca %}

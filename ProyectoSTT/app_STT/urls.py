@@ -1,8 +1,7 @@
 from django.urls import path
-from app_STT.views import agregar_avatar, tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DetailView, usuario_DeleteView,perfil_DetailView
+from app_STT.views import Bio_DetailView, agregar_avatar, agregar_bio, avatar_UpdateView, perfil, tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DetailView, usuario_DeleteView
 from django.contrib.auth.views import LogoutView
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', inicio, name= "Inicio"),
@@ -20,10 +19,13 @@ urlpatterns = [
     path('actualizarcafe/<pk>', cafes_UpdateView.as_view(), name = "updatecafe"),
     path('borrarusuario/<pk>', usuario_DeleteView.as_view(), name = "deleteuser"),
     path('actualizarusuario/<pk>', usuario_UpdateView.as_view(), name = "updateuser"),
-    path('profile/', perfil_DetailView.as_view(), name = "perfil"),
+    #path('profile/', perfil_DetailView.as_view(), name = "perfil"),
     path('actualizar_avatar/',agregar_avatar , name = "updateavatar"),
+    path('actualizaravatar/<pk>/', avatar_UpdateView.as_view(), name = "perfilavatar"),
+    path('actualizar_bio/',agregar_bio , name = "updatebio"),
+    path('bio/', Bio_DetailView.as_view(), name = "bio"),
+    path('profile/', perfil, name = "perfil"),
+    #path('actualizarbio/<int:pk>', bio_UpdateView.as_view(), name = "updatebio"),
 
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

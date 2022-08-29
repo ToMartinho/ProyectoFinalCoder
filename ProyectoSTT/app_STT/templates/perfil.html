@@ -4,12 +4,24 @@
 {% block codigoaca %}
     <div style="margin-left:270px; margin-top:50px;">
         <br>
-        <h1> <strong style="color: burlywood">PERFIL </strong></h1>
+        <h1> <strong style="color: burlywood">PERFIL </strong>
+        {% if user.perfil.imagen %}
+        
+            <img class="rounded-circle account-img" width='55px' src="{{ user.perfil.imagen.url }}"></h1>
+        {% endif %}
         <hr>
                 <li><strong>Nombre de usuario:</strong>{{user.username}} <strong>Email:</strong>{{user.email}} </li>
-                <button><a href="{% url 'updateuser' user.pk %}">Editar</a></button>
-                <button><a href="{% url 'deleteuser' user.pk %}">eliminar</a></button>
-                <button><a href="{% url 'updateavatar'%}">cambiar foto</a></button>          
+                <button class="btn btn-secondary"><a  class="nav-link" href="{% url 'updateuser' user.id %}">Editar</a></button>
+                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'deleteuser' user.id %}">eliminar</a></button>
+                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'updateavatar' %}">cambiar foto</a></button>
+                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'updatebio' %}">cambiar bio</a></button>
+            
+            <li><strong>Descripcion:</strong>{{user.perfil.bio}}</li>
+            <div>
+                {{user.perfil.link}}
+            </div>
+
+
 
         <hr>
     </div>
