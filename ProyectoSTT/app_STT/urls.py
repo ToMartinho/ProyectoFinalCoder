@@ -1,5 +1,5 @@
 from django.urls import path
-from app_STT.views import Bio_DetailView, agregar_avatar, agregar_bio, avatar_UpdateView, perfil, tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DetailView, usuario_DeleteView
+from app_STT.views import  agregar_avatar, agregar_bio, avatar_UpdateView, cafes_CreateView, perfil, tipos_de_cafe, inicio, ver_tipos_cafe, ver_lista_metodos, metodos,lista_usuarios, buscar, ingreso, register, cafes_DetailView, cafes_DeleteView, cafes_UpdateView, usuario_UpdateView, usuario_DeleteView
 from django.contrib.auth.views import LogoutView
 
 
@@ -23,8 +23,8 @@ urlpatterns = [
     path('actualizar_avatar/',agregar_avatar , name = "updateavatar"),
     path('actualizaravatar/<pk>/', avatar_UpdateView.as_view(), name = "perfilavatar"),
     path('actualizar_bio/',agregar_bio , name = "updatebio"),
-    path('bio/', Bio_DetailView.as_view(), name = "bio"),
     path('profile/', perfil, name = "perfil"),
+     path('receta/', cafes_CreateView.as_view(), name = "receta"),
     #path('actualizarbio/<int:pk>', bio_UpdateView.as_view(), name = "updatebio"),
 
 ]

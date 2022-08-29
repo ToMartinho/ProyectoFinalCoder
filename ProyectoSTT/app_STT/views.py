@@ -6,7 +6,7 @@ from app_STT.models import Tipos_de_cafe, Metodo
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
-from app_STT.forms import BioFormulario, RegistroUsuario, AvatarFormulario
+from app_STT.forms import BioFormulario, RecetaFormulario, RegistroUsuario, AvatarFormulario
 from django.views.generic import DeleteView,UpdateView,CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en CLASES
@@ -135,26 +135,47 @@ def register(request):
 
 @login_required
 def agregar_avatar(request):
-    
+    perfil=request.user.perfil
+    form = AvatarFormulario(instance=perfil)
     if request.method == 'POST':
         
+        #try:
+            #perfil = request.user.perfil
+        #except Perfil.DoesNotExist:
+            #perfil = Perfil(user=request.user)
+ 
+        form = AvatarFormulario(request.POST, request.FILES, instance=perfil)
         
-        form = AvatarFormulario(request.POST, request.FILES)
 
         if form.is_valid():
 
-            u = Perfil.objects.filter(user=request.user)
+           # u = Perfil.objects.filter(user=request.user).update()
+            form.save()
+            #u.delete()
+            #if Perfil.imagen:
+                #data = form.cleaned_data
 
-            u.delete()
-            
-            data = form.cleaned_data
+                #usr = User.objects.get(username=request.user)
 
-            usr = User.objects.get(username=request.user)
+                #img = Perfil.objects.filter(user=usr,imagen=data['imagen'])
 
-            img = Perfil(user=usr,imagen=data['imagen'])
+                #img.save()
 
-            img.save()
-            return render(request, "inicio.html")        
+            #usr = User.objects.get(username=request.user)
+
+                #Perfil.objects.filter(user=request.user).update(imagen=data['imagen'])
+
+            return render(request, "inicio.html")
+        #else: 
+                #data = form.cleaned_data
+
+                #usr = User.objects.get(username=request.user)
+
+                #img = Perfil.objects.filter(user=usr,imagen=data['imagen'])
+
+                #img.save()
+
+
 
     else:
 
@@ -164,26 +185,17 @@ def agregar_avatar(request):
 
 @login_required
 def agregar_bio(request):
-    
+
+    perfil=request.user.perfil
+    form = BioFormulario(instance=perfil)
     if request.method == 'POST':
-        
-        
-        form = BioFormulario(request.POST)
+         
+        form = BioFormulario(request.POST, instance=perfil)
 
         if form.is_valid():
+
+            form.save()
             
-            usr = User.objects.get(username=request.user)
-            
-            data = form.cleaned_data
-            if data['bio']:
-                b = Perfil(user=usr,bio=data['bio'])
-
-                b.save()
-
-            elif data['link']:
-
-                a = Perfil(user=usr,link=data['link'])
-                a.save()
             return render(request, "inicio.html")        
 
     else:
@@ -195,6 +207,27 @@ def agregar_bio(request):
 def perfil(request):
     return render(request, 'perfil.html')
 
+
+#@login_required
+#def agregar_receta(request):
+
+    #cafe =request.user.tipos_de_cafe
+    #form = RecetaFormulario(instance=cafe)
+    #if request.method == 'POST':
+         
+        #form = RecetaFormulario(request.POST, instance=cafe)
+
+        #if form.is_valid():
+
+            #form.save()
+            
+            #return render(request, "inicio.html")        
+
+    #else:
+
+        #form = RecetaFormulario()
+
+    #return render(request, "update_cafe.html", {'form': form})
 
 
 
@@ -212,7 +245,7 @@ class cafes_DetailView(DetailView):
 class cafes_UpdateView(LoginRequiredMixin, UpdateView):
     model = Tipos_de_cafe
     template_name = "update_cafe.html"
-    fields = ['nombre_tipo','ingredientes']
+    fields = ['nombre_tipo','ingredientes','imagen','autor']
     success_url = '/app_STT/'
 
 
@@ -250,20 +283,18 @@ class avatar_UpdateView(LoginRequiredMixin, UpdateView):
     success_url = '/app_STT/'
     context_object_name = 'avatar'
 
-class Bio_DetailView(DetailView):
-    model = Perfil
-    template_name = "bio.html"
-    context_object_name = 'user'
-    def get_object(self):
-        return self.request.user
-
 
 
 #class bio_UpdateView(LoginRequiredMixin, UpdateView):
 
-    #model= Avatar
+    #model= Perfil
     #template_name = 'perfilupdate.html'
-    #fields = ['bio','link']
+    #fields = ['imagen']
     #success_url = '/app_STT/'
     #context_object_name = 'avatar'
 
+class cafes_CreateView(LoginRequiredMixin, CreateView):
+    model = Tipos_de_cafe
+    template_name = "create_cafe.html"
+    fields = ['nombre_tipo','ingredientes','imagen','autor']
+    success_url = '/app_STT/'

@@ -1,0 +1,20 @@
+{% extends 'inicio.html' %}
+
+
+{% block codigoaca %}
+    
+    <div style="margin-left:270px; margin-top:85px;">
+        <h1><strong style="color: burlywood">Recetas</strong></h1>
+        <hr>
+        <ul>
+                <form method="POST"> {% csrf_token %}
+                    {{form.as_p}}
+
+                    <input type="submit" value="enviar">
+
+                </form>
+        </ul>
+        <hr>
+    </div>
+    
+{% endblock codigoaca %}

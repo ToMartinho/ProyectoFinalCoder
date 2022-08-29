@@ -5,20 +5,23 @@
     <div style="margin-left:270px; margin-top:50px;">
         <br>
         <h1> <strong style="color: burlywood">PERFIL </strong>
-        {% if user.perfil.imagen %}
         
-            <img class="rounded-circle account-img" width='55px' src="{{ user.perfil.imagen.url }}"></h1>
-        {% endif %}
+        
+        <a class="nav-link" href="{% url 'updateavatar' %}">  <img class="rounded-circle account-img" width='55px' src="{{ user.perfil.imagen.url }}"></a></h1>
+       
+
         <hr>
                 <li><strong>Nombre de usuario:</strong>{{user.username}} <strong>Email:</strong>{{user.email}} </li>
                 <button class="btn btn-secondary"><a  class="nav-link" href="{% url 'updateuser' user.id %}">Editar</a></button>
-                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'deleteuser' user.id %}">eliminar</a></button>
-                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'updateavatar' %}">cambiar foto</a></button>
-                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'updatebio' %}">cambiar bio</a></button>
+                <button class="btn btn-secondary"><a class="nav-link" href="{% url 'deleteuser' user.pk %}">eliminar</a></button>
             
             <li><strong>Descripcion:</strong>{{user.perfil.bio}}</li>
+            <button class="btn btn-secondary"><a class="nav-link" href="{% url 'updatebio' %}">cambiar bio</a></button>
             <div>
-                {{user.perfil.link}}
+                
+                {% if user.perfil.link %}
+                    link: <a href="{{user.perfil.link}}">{{user.perfil.link}}}</a>
+                {% endif %}
             </div>
 
 

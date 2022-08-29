@@ -36,7 +36,6 @@
                             <img src="{{url}}" height='30px' alt="imagen">
                             <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 0px;">{{user.username}}</a></p></li>
                             <li><a class="dropdown-item" href={% url "Deslog" %}>Logout</a></li>
-                            <li><a class="dropdown-item" href={% url "bio" %}><p style="margin-left: 0px;">Bio</a></p></li>
                             
                     
                         {% else %}
@@ -60,7 +59,7 @@
                                 Chat
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href={% url "TiposDeCafe" %}>
+                            <a class="nav-link" href={% url "receta" %}>
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Agregar Recetas
                             </a>

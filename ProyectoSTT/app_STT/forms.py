@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import
 
-from app_STT.models import Perfil
+from app_STT.models import Perfil, Tipos_de_cafe
 
 
 class RegistroUsuario(UserCreationForm):
@@ -15,16 +14,20 @@ class RegistroUsuario(UserCreationForm):
                 fields = ['username','email']
                 help_texts ={k:""for k in fields}
 
-class AvatarFormulario(forms.Form):
-        imagen = forms.ImageField()
+class AvatarFormulario(forms.ModelForm):
         class Meta:
                 model= Perfil
                 fields = ['imagen']
 
-class BioFormulario(forms.Form):
+class BioFormulario(forms.ModelForm):
         bio = forms.CharField(required=False, widget=forms.Textarea)
         link = forms.URLField(required=False)
         class Meta:
                 model=Perfil
                 fields = ['bio','link']
 
+class RecetaFormulario(forms.ModelForm):
+        class Meta:
+                model=Tipos_de_cafe
+                fields = '__all__'
+                exclude = ['user']
