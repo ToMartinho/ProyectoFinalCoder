@@ -135,10 +135,10 @@ def register(request):
 
 @login_required
 def agregar_avatar(request):
-    
-        form = AvatarFormulario()
+        perfil=request.user.perfil
+        form = AvatarFormulario(instance=perfil)
         if request.method == 'POST':
-            form = AvatarFormulario(request.POST, request.FILES)
+            form = AvatarFormulario(request.POST, request.FILES,instance=perfil)
         
 
             if form.is_valid():
