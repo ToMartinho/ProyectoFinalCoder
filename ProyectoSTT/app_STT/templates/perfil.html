@@ -7,7 +7,7 @@
         <h1> <strong style="color: burlywood">PERFIL </strong>
         
         
-        <a class="nav-link" href="{% url 'updateavatar' %}">  <img class="rounded-circle account-img" width='55px' src="{{ user.perfil.imagen.url }}"></a></h1>
+        <a class="nav-link" href="{% url 'perfilavatar' user.pk %}">  <img class="rounded-circle account-img" width='55px' src="{{ user.perfil.imagen.url }}"></a></h1>
        
 
         <hr>

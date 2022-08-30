@@ -12,13 +12,13 @@
             {% for cafes in lista_cafes %}
 
             <div class="card" style="width: 18rem;" enctype="multipart/form-data">
-                <img src="cafes.imagen.url" class="card-img-top" alt="cafe">
+                <img src="{{cafes.imagen.url}}" class="card-img-top" alt="cafe">
                 <div class="card-body">
                   <h5 class="card-title">{{cafes.nombre_tipo}}</h5>
                   <p class="card-text">{{cafes.ingredientes}}</p>
-                  <a href="{% url 'detailcafe' user.id %}" class="btn btn-primary">detalles</a>
-                  {% if cafes.autor == 'request.user' %}
-                    <a href="{% url 'detailcafe' user.id %}" class="btn btn-primary">eliminar</a>
+                  <a href="{% url 'detailcafe' cafes.id %}" class="btn btn-primary">detalles</a>
+                  {% if cafes.autor.pk == user.id %}
+                    <a href="{% url 'deletecafe' cafes.id %}" class="btn btn-primary">eliminar</a>
                     {% endif %}
                 </div>
               </div>

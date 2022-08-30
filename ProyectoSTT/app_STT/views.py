@@ -184,7 +184,7 @@ class cafes_DeleteView(LoginRequiredMixin, DeleteView):
     template_name = "delete_cafe.html"
     success_url = '/app_STT/'
 
-class cafes_DetailView(DetailView):
+class cafes_DetailView(LoginRequiredMixin, DetailView):
     model = Tipos_de_cafe
     template_name = "detail_cafe.html"
     context_object_name = 'cafe'
@@ -222,7 +222,9 @@ class avatar_UpdateView(LoginRequiredMixin, UpdateView):
     form_class= AvatarFormulario
     success_url = '/app_STT/'
     context_object_name = 'avatar'
-
+    def get_object(self):
+        perfil,created=Perfil.objects.get_or_create(user=self.request.user)
+        return perfil
 class cafes_CreateView(LoginRequiredMixin, CreateView):
     model = Tipos_de_cafe
     template_name = "create_cafe.html"
