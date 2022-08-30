@@ -10,7 +10,7 @@
             
             {% for usuario in lista_usuarios %}
                 <li><strong>Nombre de usuario:</strong> {{usuario.username}}
-                <img src="{{url}}" height='30px' alt="imagen"></li>            
+                <img src="{{usuario.perfil.imagen.url}}" height='30px' alt="imagen"></li>            
             {% endfor %}
                 
 

@@ -7,7 +7,7 @@
         <h1><strong style="color: burlywood">Actualizar perfil</strong></h1>
         <hr>
         <ul>
-                <form action="{% url 'perfilavatar' %}" method="POST"> {% csrf_token %}
+                <form action="{% url 'perfilavatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                     
                     {{form.as_p}}
 

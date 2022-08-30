@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 class Tipos_de_cafe(models.Model):
     nombre_tipo = models.CharField(max_length=50)
     ingredientes = models.CharField(max_length=200)
-    autor = models.ForeignKey(User,default=1, on_delete=models.CASCADE)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     imagen = models.ImageField(default='default.jpg', upload_to='cafes', null=True,blank = True)
     fecha = models.DateTimeField(auto_now_add=True,auto_now=False)
    

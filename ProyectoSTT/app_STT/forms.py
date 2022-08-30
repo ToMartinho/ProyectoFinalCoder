@@ -29,5 +29,4 @@ class BioFormulario(forms.ModelForm):
 class RecetaFormulario(forms.ModelForm):
         class Meta:
                 model=Tipos_de_cafe
-                fields = '__all__'
-                exclude = ['user']
+                fields = ['nombre_tipo','ingredientes','imagen']
