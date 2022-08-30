@@ -179,6 +179,9 @@ def agregar_bio(request):
 def perfil(request):
     return render(request, 'perfil.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 class cafes_DeleteView(LoginRequiredMixin, DeleteView):
     model = Tipos_de_cafe
     template_name = "delete_cafe.html"

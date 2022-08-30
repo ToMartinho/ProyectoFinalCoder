@@ -84,21 +84,33 @@
                                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">PROYECTO CODER FINAL</div>      
-                        <div>
-                            <img src="{{url}}" height='30px' alt="imagen">
-                        </div>                  
+                        <div class="small">PROYECTO CODER FINAL</div>
+                        <a class="nav-link" href={% url "about" %}>ABOUT</a>      
                     </div>
                 </nav>
             </div>
                 
+                
                 {% block codigoaca %}
 
+                <div style="margin-left:270px; margin-top:75px;">
+
+                    <h1>PROYECTO FINAL CODERHOUSE</h1>
+                    <br>
+                    <h3>Bienvenidos cafeteros, en este proyecto se van a encontrar con un estilo de blog,<br> en el cual se puden
+                        compartir recetas para los cafeteros aficionados.<br>
+                        Y chatear para compartir recertas.
+                    </h3>
+                    
                     <div style="margin-left:270px; margin-top:75px;">
 
                         <h4>{{mensaje}}</h4>
 
                     </div>
+
+                </div>
+
+                    
                     
                 {% endblock codigoaca %}
                     
