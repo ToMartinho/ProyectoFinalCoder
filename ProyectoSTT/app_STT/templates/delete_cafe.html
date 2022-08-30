@@ -7,8 +7,12 @@
         <br>
         <h1><strong style="color: burlywood"> Receta borrada </strong></h1>
         <hr>
-                
+            <form method="POST">{% csrf_token %}
 
+                <p>SEGURO QUE DESEA BORRAR SU RECETA??</p>
+                <input type="submit" value="confirmar">
+
+            </form>
         <hr>
     </div>
     

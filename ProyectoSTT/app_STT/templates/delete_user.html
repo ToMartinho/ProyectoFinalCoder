@@ -7,7 +7,12 @@
         <br>
         <h1><strong style="color: burlywood"> Usuario borrado </strong></h1>
         <hr>
-                
+            <form method="POST">{% csrf_token %}
+
+                <p>SEGURO QUE DESEA BORRAR USUARIO{{user.username}}</p>
+                <input type="submit" value="confirmar">
+
+            </form>             
 
         <hr>
     </div>
