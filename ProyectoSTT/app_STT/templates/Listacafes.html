@@ -17,8 +17,9 @@
                   <h5 class="card-title">{{cafes.nombre_tipo}}</h5>
                   <p class="card-text">{{cafes.ingredientes}}</p>
                   <a href="{% url 'detailcafe' cafes.id %}" class="btn btn-primary">detalles</a>
-                  {% if cafes.autor.pk == user.id %}
+                  {% if user.is_staff == 1 or cafes.autor.pk == user.id %}
                     <a href="{% url 'deletecafe' cafes.id %}" class="btn btn-primary">eliminar</a>
+                    <a href="{% url 'updatecafe' cafes.id %}" class="btn btn-primary">editar</a>
                     {% endif %}
                 </div>
               </div>
