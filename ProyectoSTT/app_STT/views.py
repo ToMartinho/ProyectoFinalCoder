@@ -61,7 +61,7 @@ def ver_lista_metodos(self):
 def lista_usuarios(request):
     Usuario = User.objects.all()
     try:
-        avatares = Avatar.objects.filter(user=request.user.id)
+        avatares = Perfil.objects.filter(user=request.user.id)
 
         return render(request, "lista_usuarios.html",{"url":avatares[0].imagen.url, "lista_usuarios": Usuario})
     except:
@@ -135,53 +135,25 @@ def register(request):
 
 @login_required
 def agregar_avatar(request):
-    perfil=request.user.perfil
-    form = AvatarFormulario(instance=perfil)
-    if request.method == 'POST':
-        
-        #try:
-            #perfil = request.user.perfil
-        #except Perfil.DoesNotExist:
-            #perfil = Perfil(user=request.user)
- 
-        form = AvatarFormulario(request.POST, request.FILES, instance=perfil)
-        
-
-        if form.is_valid():
-
-           # u = Perfil.objects.filter(user=request.user).update()
-            form.save()
-            #u.delete()
-            #if Perfil.imagen:
-                #data = form.cleaned_data
-
-                #usr = User.objects.get(username=request.user)
-
-                #img = Perfil.objects.filter(user=usr,imagen=data['imagen'])
-
-                #img.save()
-
-            #usr = User.objects.get(username=request.user)
-
-                #Perfil.objects.filter(user=request.user).update(imagen=data['imagen'])
-
-            return render(request, "inicio.html")
-        #else: 
-                #data = form.cleaned_data
-
-                #usr = User.objects.get(username=request.user)
-
-                #img = Perfil.objects.filter(user=usr,imagen=data['imagen'])
-
-                #img.save()
-
-
-
-    else:
-
+    
         form = AvatarFormulario()
+        if request.method == 'POST':
+            form = AvatarFormulario(request.POST, request.FILES)
+        
 
-    return render(request, "update_avatar.html", {'form': form}) 
+            if form.is_valid():
+                form.save()
+
+                return render(request, "inicio.html")
+     
+
+
+
+        else:
+
+            form = AvatarFormulario()
+
+            return render(request, "update_avatar.html", {'form': form}) 
 
 @login_required
 def agregar_bio(request):
@@ -206,30 +178,6 @@ def agregar_bio(request):
 
 def perfil(request):
     return render(request, 'perfil.html')
-
-
-#@login_required
-#def agregar_receta(request):
-
-    #cafe =request.user.tipos_de_cafe
-    #form = RecetaFormulario(instance=cafe)
-    #if request.method == 'POST':
-         
-        #form = RecetaFormulario(request.POST, instance=cafe)
-
-        #if form.is_valid():
-
-            #form.save()
-            
-            #return render(request, "inicio.html")        
-
-    #else:
-
-        #form = RecetaFormulario()
-
-    #return render(request, "update_cafe.html", {'form': form})
-
-
 
 class cafes_DeleteView(LoginRequiredMixin, DeleteView):
     model = Tipos_de_cafe
@@ -259,14 +207,6 @@ class usuario_DetailView(DetailView):
     template_name = "detail_user.html"
     context_object_name = 'user'
 
-
-#class perfil_DetailView(DetailView):
-   # model = User
-    #template_name = "perfil.html"
-    #context_object_name = 'user'
-    #def get_object(self):
-        #return self.request.user
-
 class usuario_UpdateView(LoginRequiredMixin ,UpdateView):
 
     model = User
@@ -282,16 +222,6 @@ class avatar_UpdateView(LoginRequiredMixin, UpdateView):
     form_class= AvatarFormulario
     success_url = '/app_STT/'
     context_object_name = 'avatar'
-
-
-
-#class bio_UpdateView(LoginRequiredMixin, UpdateView):
-
-    #model= Perfil
-    #template_name = 'perfilupdate.html'
-    #fields = ['imagen']
-    #success_url = '/app_STT/'
-    #context_object_name = 'avatar'
 
 class cafes_CreateView(LoginRequiredMixin, CreateView):
     model = Tipos_de_cafe

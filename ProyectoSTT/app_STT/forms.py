@@ -27,6 +27,7 @@ class BioFormulario(forms.ModelForm):
                 fields = ['bio','link']
 
 class RecetaFormulario(forms.ModelForm):
+        ingredientes = forms.CharField(required=False, widget=forms.Textarea)
         class Meta:
                 model=Tipos_de_cafe
                 fields = ['nombre_tipo','ingredientes','imagen']

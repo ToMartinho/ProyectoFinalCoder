@@ -24,8 +24,3 @@ class Perfil(models.Model):
     imagen = models.ImageField(default='default.jpg', upload_to='avatares', null=True,blank = True, unique=True)
     bio = models.TextField(null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
-
-#class Bio(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #bio = models.TextField(null=True, blank=True)
-    #link = models.URLField(max_length=200, null=True, blank=True)

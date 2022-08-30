@@ -33,7 +33,7 @@
 
                         
                         {% if user.is_authenticated %}
-                            <img src="{{url}}" height='30px' alt="imagen">
+                            <img src="{{user.perfil.imagen.url}}" height='30px' alt="imagen">
                             <li><a class="dropdown-item" href={% url "perfil" %}><p style="margin-left: 0px;">{{user.username}}</a></p></li>
                             <li><a class="dropdown-item" href={% url "Deslog" %}>Logout</a></li>
                             
